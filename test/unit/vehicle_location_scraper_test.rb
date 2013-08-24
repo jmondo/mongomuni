@@ -31,4 +31,11 @@ class VehicleLocationScraperTest < ActiveSupport::TestCase
       assert locations.first.vehicleId, 'should have vehicle id'
     end
   end
+
+  test "it creates a vehicle location scrape with the time from the response" do
+    VCR.use_cassette('many buses', record: :once) do
+      VehicleLocationScraper.new('22').create_vehicle_locations
+      assert VehicleLocationScrape.first.time
+    end
+  end
 end

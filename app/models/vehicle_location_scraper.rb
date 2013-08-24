@@ -4,6 +4,7 @@ require 'uri'
 class VehicleLocationScraper < Struct.new(:route)
   def create_vehicle_locations
     Rails.logger.info("scraping vehicle locations for #{route}")
+    VehicleLocationScrape.create(response['body']['lastTime'])
     vehicle_locations_xml.collect do |v|
       v['vehicleId'] = v.delete('id')
       VehicleLocation.create(v)
