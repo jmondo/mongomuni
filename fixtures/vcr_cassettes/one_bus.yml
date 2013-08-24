@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://webservices.nextbus.com/service/publicXMLFeed?a=sf-muni&command=vehicleLocations&r=22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 24 Aug 2013 19:31:51 GMT
+      Server:
+      - Apache/2.2.4 (Unix) mod_ssl/2.2.4 OpenSSL/0.9.7m DAV/2 mod_jk/1.2.30
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Length:
+      - '2331'
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - text/xml
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"utf-8\" ?> \n<body copyright=\"All
+        data copyright San Francisco Muni 2013.\">\n<Error shouldRetry=\"false\">\n
+        \ last time \"t\" parameter must be specified in query string\n</Error>\n<vehicle
+        id=\"5409\" routeTag=\"22\" dirTag=\"22_IB2\" lat=\"37.76724\" lon=\"-122.42895\"
+        secsSinceReport=\"2\" predictable=\"true\" heading=\"357\" speedKmHr=\"0\"/>\n<lastTime time=\"1377372709140\"/>\n</body>\n"
+    http_version:
+  recorded_at: Sat, 24 Aug 2013 19:31:50 GMT
+recorded_with: VCR 2.5.0

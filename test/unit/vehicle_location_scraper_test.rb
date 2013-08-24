@@ -9,12 +9,19 @@ class VehicleLocationScraperTest < ActiveSupport::TestCase
     end
   end
 
-  test "it returns an array of vehicle location objects" do
+  test "it returns an array of vehicle location objects with many buses" do
     VCR.use_cassette('many buses', record: :once) do
       locations = VehicleLocationScraper.new('22').create_vehicle_locations
       assert Array === locations, 'should be an array'
       assert VehicleLocation === locations.first, 'should be a vehicle location'
-      assert locations.first.persisted?, 'should be saved'
+    end
+  end
+
+  test "it returns an array of vehicle location objects with one bus" do
+    VCR.use_cassette('one bus', record: :once) do
+      locations = VehicleLocationScraper.new('22').create_vehicle_locations
+      assert Array === locations, 'should be an array'
+      assert VehicleLocation === locations.first, 'should be a vehicle location'
     end
   end
 
