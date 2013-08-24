@@ -3,12 +3,12 @@ require 'uri'
 
 class VehicleLocationScraper < Struct.new(:route)
   def create_vehicle_locations
-    Rails.logger.info("scraping vehicle locations for #{route}")
+    Rails.logger.info("--- scraping vehicle locations for #{route} since #{last_scraped_at}")
     VehicleLocationScrape.create(
       time: response['body']['lastTime']['time'],
       routeId: route
     )
-    vehicle_locations_xml.collect do |v|
+    vehicle_locations_hashes.collect do |v|
       v['vehicleId'] = v.delete('id')
       VehicleLocation.create(v)
     end
@@ -16,14 +16,22 @@ class VehicleLocationScraper < Struct.new(:route)
 
   private
 
-  def response
-    uri = URI("http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=#{route}")
-    xml = Net::HTTP.get(uri)
-    Hash.from_xml(xml)
+  def last_scraped_at
+    VehicleLocationScrape.where(routeId: route).last.try(:time)
   end
 
-  def vehicle_locations_xml
-    Array(response['body']['vehicle'])
+  def response
+    unless @response
+      uri = URI("http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=#{route}&t=#{last_scraped_at}")
+      Rails.logger.info("--- at #{uri}")
+      xml = Net::HTTP.get(uri)
+      @response = Hash.from_xml(xml)
+    end
+    @response
+  end
+
+  def vehicle_locations_hashes
+    Array.wrap(response['body']['vehicle'])
   end
 
 end
