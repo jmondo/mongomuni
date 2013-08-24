@@ -4,7 +4,7 @@ require 'uri'
 class VehicleLocationScraper < Struct.new(:route)
   def vehicle_locations
     vehicle_locations_xml.collect do |v|
-      VehicleLocation.new(v)
+      VehicleLocation.create(v)
     end
   end
 
