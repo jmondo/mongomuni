@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 
 class VehicleLocationScraper < Struct.new(:route)
-  def vehicle_locations
+  def create_vehicle_locations
     vehicle_locations_xml.collect do |v|
       VehicleLocation.create(v)
     end
