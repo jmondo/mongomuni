@@ -3,7 +3,7 @@ class VehicleLocation
   include Mongoid::Timestamps
 
   field :location, type: Array
-  index({ location: "2d" }, { min: -180, max: 180 })
+  index({ location: "2dsphere" }, { min: -180, max: 180 })
 
   set_callback(:validation, :before) do |document|
     document.location = [document.lat, document.lon]
