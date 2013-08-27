@@ -39,6 +39,14 @@ class VehicleLocationScraperTest < ActiveSupport::TestCase
     end
   end
 
+  test "it sets the location on the object as an array of lat lon" do
+    VCR.use_cassette('many buses', record: :once) do
+      locations = VehicleLocationScraper.new('22').create_vehicle_locations
+      loc = locations.first
+      assert_equal [loc.lat, loc.lon], loc.location
+    end
+  end
+
   test "it creates a vehicle location scrape with the time from the response" do
     VCR.use_cassette('many buses', record: :once) do
       VehicleLocationScraper.new('22').create_vehicle_locations

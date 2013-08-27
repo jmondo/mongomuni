@@ -28,6 +28,7 @@ group :test do
   gem "mocha", '>=0.14.0', require: false
   gem 'vcr', '~>2.5.0'
   gem 'webmock', '~>1.12.0'
+  gem 'pry-rails'
 end
 
 # To use ActiveModel has_secure_password
