@@ -12,5 +12,5 @@ class VehicleLocation
   set_callback(:validation, :before) do |document|
     document.location = [document.lat.to_f, document.lon.to_f]
   end
-  end
+
 end
