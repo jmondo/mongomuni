@@ -43,7 +43,7 @@ class VehicleLocationScraperTest < ActiveSupport::TestCase
     VCR.use_cassette('many buses', record: :once) do
       locations = VehicleLocationScraper.new('22').create_vehicle_locations
       loc = locations.first
-      assert_equal [loc.lat.to_f, loc.lon.to_f], loc.location
+      assert_equal [loc.lon.to_f, loc.lat.to_f], loc.location
     end
   end
 
