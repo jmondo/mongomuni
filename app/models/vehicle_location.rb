@@ -19,6 +19,6 @@ class VehicleLocation
 
   def self.at_church_and_duboce_coord
     where(speedKmHr: '0', routeTag: "N", leadingVehicleId: nil).
-      geo_near([37.7694699, -122.42941]).max_distance(100).spherical
+      geo_near([-122.42941, 37.7694699]).max_distance(100).spherical
   end
 end
