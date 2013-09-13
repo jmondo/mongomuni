@@ -6,6 +6,15 @@ class VehicleLocation
   field :lat, type: Float
   field :lon, type: Float
 
+  field :dirTag, type: String
+  field :heading, type: String
+  field :vehicleId, type: String
+  field :leadingVehicleId, type: String
+  field :predictable, type: Boolean
+  field :routeTag, type: String
+  field :secsSinceReport, type: Integer
+  field :speedKmHr, type: Integer
+
   index({ location: "2d" }, { min: -180, max: 180 })
   index({ location: "2dsphere" }, { min: -180, max: 180 })
 
