@@ -24,7 +24,7 @@ gem 'jquery-rails'
 gem 'mongoid', '>= 3.0.0'
 gem 'bson_ext'
 gem 'pry-rails'
-gem 'rails_admin'
+gem 'rails_admin', '~>0.4.0'
 
 group :test do
   gem "mocha", '>=0.14.0', require: false
