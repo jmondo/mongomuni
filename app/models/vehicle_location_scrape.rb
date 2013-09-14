@@ -2,6 +2,6 @@
 class VehicleLocationScrape
   include Mongoid::Document
 
-  field :time, type: DateTime
+  field :time, type: String
   field :routeTag, type: String
 end
