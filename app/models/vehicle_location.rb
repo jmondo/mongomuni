@@ -16,6 +16,8 @@ class VehicleLocation
 
   include Mongoid::Timestamps
 
+  acts_as_gmappable :position => :location_reverse, :process_geocoding => false
+
   index({ location: "2d" }, { min: -180, max: 180 })
   index({ location: "2dsphere" }, { min: -180, max: 180 })
 
@@ -30,6 +32,10 @@ class VehicleLocation
   end
 
   def self.at_church_and_duboce_coord
-    where(speedKmHr: '0', routeTag: "N").geo_near([-122.4295, 37.76947]).max_distance(0.01).spherical
+    where(speedKmHr: '0', routeTag: "N").geo_near([-122.4295, 37.76947]).max_distance(0.00001).spherical
+  end
+
+  def location_reverse
+    location.reverse
   end
 end

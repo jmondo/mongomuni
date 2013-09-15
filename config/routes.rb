@@ -4,6 +4,7 @@ Munimongo3::Application.routes.draw do
   devise_for :users
 
   resources :vehicle_location_scrapes, only: 'create'
+  resources :vehicle_locations, only: 'index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
